@@ -21,7 +21,7 @@ function ModelMovie({ selectedMovie, onClose }) {
         className="bg-gray-900 text-white max-w-3xl w-full max-h-[90vh] overflow-y-auto rounded-xl"
       >
 
-        {/* Close */}
+       
         <div className="flex justify-end p-4">
 
           <button
@@ -33,7 +33,7 @@ function ModelMovie({ selectedMovie, onClose }) {
 
         </div>
 
-        {/* Poster */}
+       
         <div className="px-5">
 
           {selectedMovie.image?.original ? (
@@ -50,7 +50,7 @@ function ModelMovie({ selectedMovie, onClose }) {
 
         </div>
 
-        {/* Details */}
+       
         <div className="p-6">
 
           <h2 className="text-3xl font-bold">
@@ -69,7 +69,7 @@ function ModelMovie({ selectedMovie, onClose }) {
 
           </div>
 
-          {/* Genre */}
+         
           {selectedMovie.genres?.length > 0 && (
             <div className="mt-5">
 
@@ -93,7 +93,7 @@ function ModelMovie({ selectedMovie, onClose }) {
             </div>
           )}
 
-          {/* Summary */}
+          
           <div className="mt-6">
 
             <h3 className="text-xl font-bold mb-2">

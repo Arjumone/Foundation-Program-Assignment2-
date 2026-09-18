@@ -2,7 +2,7 @@ import { Link } from "react-router";
 
 function HeroBanner() {
   return (
-    <section className="min-h-[85vh] relative flex items-center">
+    <section className="min-h-[85vh] relative flex items-center sm:justify-center bg-gray-950 overflow-hidden">
 
       <img
         src="https://img.magnific.com/free-vector/red-movie-theater-seats-with-curtains-background_1017-38388.jpg?semt=ais_hybrid&w=740&q=80"
