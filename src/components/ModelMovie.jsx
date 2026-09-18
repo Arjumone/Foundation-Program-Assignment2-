@@ -1,14 +1,14 @@
-function ModelMovie({ movie, onClose }) {
+function ModelMovie({ selectedMovie, onClose }) {
 
-  if (!movie) {
+  if (!selectedMovie) {
     return null;
   }
 
-  const rating = movie.rating?.average || "N/A";
+  const rating = selectedMovie.rating?.average || "";
 
-  const year = movie.premiered
-    ? movie.premiered.slice(0, 4)
-    : "N/A";
+  const year = selectedMovie.premiered
+    ? selectedMovie.premiered.slice(0, 4)
+    : "";
 
   return (
     <div
@@ -36,10 +36,10 @@ function ModelMovie({ movie, onClose }) {
         {/* Poster */}
         <div className="px-5">
 
-          {movie.image?.original ? (
+          {selectedMovie.image?.original ? (
             <img
-              src={movie.image.original}
-              alt={movie.name}
+              src={selectedMovie.image.original}
+              alt={selectedMovie.name}
               className="w-full h-64 md:h-96 object-cover rounded-lg"
             />
           ) : (
@@ -54,23 +54,23 @@ function ModelMovie({ movie, onClose }) {
         <div className="p-6">
 
           <h2 className="text-3xl font-bold">
-            {movie.name}
+            {selectedMovie.name}
           </h2>
 
           <div className="flex flex-wrap gap-5 mt-4 text-gray-300">
 
             <span>
-              ⭐ Rating: {rating}
+               Rating: {rating}
             </span>
 
             <span>
-              📅 Release: {year}
+               Release: {year}
             </span>
 
           </div>
 
           {/* Genre */}
-          {movie.genres?.length > 0 && (
+          {selectedMovie.genres?.length > 0 && (
             <div className="mt-5">
 
               <h3 className="font-bold mb-2">
@@ -79,7 +79,7 @@ function ModelMovie({ movie, onClose }) {
 
               <div className="flex flex-wrap gap-2">
 
-                {movie.genres.map((genre) => (
+                {selectedMovie.genres.map((genre) => (
                   <span
                     key={genre}
                     className="bg-red-600 px-3 py-1 rounded-full text-sm"
@@ -104,7 +104,7 @@ function ModelMovie({ movie, onClose }) {
               className="text-gray-300 leading-7"
               dangerouslySetInnerHTML={{
                 __html:
-                  movie.summary ||
+                  selectedMovie.summary ||
                   "No description available.",
               }}
             />

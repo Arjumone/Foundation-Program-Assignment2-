@@ -1,4 +1,4 @@
-function CardMovie({ movie, onDetails }) {
+function CardMovie({ movie, setSelectedMovie }) {
 
   const year = movie.premiered
     ? movie.premiered.slice(0, 4)
@@ -36,17 +36,17 @@ function CardMovie({ movie, onDetails }) {
         <div className="flex justify-between mt-3 text-gray-300">
 
           <span>
-            ⭐ {rating}
+             {rating}
           </span>
 
           <span>
-            📅 {year}
+             {year}
           </span>
 
         </div>
 
         <button
-          onClick={() => onDetails(movie)}
+          onClick={() => setSelectedMovie(movie)}
           className="w-full mt-5 bg-red-600 hover:bg-red-700 py-2 rounded-lg font-semibold"
         >
           See Details

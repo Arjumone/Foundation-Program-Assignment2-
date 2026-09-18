@@ -6,28 +6,26 @@ function Movies() {
   const [movies, setMovies] = useState([]);
   const [search, setSearch] = useState("");
   const [selectedMovie, setSelectedMovie] = useState(null);
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const url = search.trim()
-      ? `https://api.tvmaze.com/search/shows?q=${search}`
-      : "https://api.tvmaze.com/shows";
+    async function getMovies() {
+      let url = "https://api.tvmaze.com/shows";
 
-    fetch(url)
-      .then((res) => res.json())
-      .then((data) => {
-        if (search.trim()) {
-          setMovies(data.map((item) => item.show));
-        } else {
-          setMovies(data);
-        }
+      if (search) {
+        url = `https://api.tvmaze.com/search/shows?q=${search}`;
+      }
 
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.log(error);
-        setLoading(false);
-      });
+      const res = await fetch(url);
+      const data = await res.json();
+
+      if (search) {
+        setMovies(data.map((item) => item.show));
+      } else {
+        setMovies(data);
+      }
+    }
+
+    getMovies();
   }, [search]);
 
   return (
@@ -38,42 +36,32 @@ function Movies() {
           Explore Movies & Shows
         </h1>
 
-        {/* Search Bar */}
-        <div className="max-w-2xl mx-auto mb-10">
+     
+        <div className="max-w-2xl mx-auto mb-10 sticky top-0 z-10 py-3 bg-gray-950">
           <input
-            type="text" 
+            type="text"
             placeholder="Search for a movie..."
             value={search}
-            onChange={(e) => {
-              setSearch(e.target.value);
-              setLoading(true);
-            }}
-            className=" text-white w-full px-5 py-4 rounded-lg outline-none border"
+            onChange={(e) => setSearch(e.target.value)}
+            className="text-white w-full px-5 py-4 rounded-lg outline-none border"
           />
         </div>
 
-        {/* Loading */}
-        {loading && (
-          <p className="text-white text-center text-xl">
-            Loading...
-          </p>
-        )}
-
-        {/* No Result */}
-        {!loading && movies.length === 0 && (
+      
+        {movies.length === 0 && (
           <p className="text-gray-400 text-center text-xl">
             No movies found.
           </p>
         )}
 
-        {/* Movie Grid */}
-        {!loading && movies.length > 0 && (
+        
+        {movies.length > 0 && (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             {movies.map((movie) => (
               <CardMovie
                 key={movie.id}
                 movie={movie}
-                onDetails={setSelectedMovie}
+                setSelectedMovie={setSelectedMovie}
               />
             ))}
           </div>
@@ -83,7 +71,7 @@ function Movies() {
 
       {/* Modal */}
       <ModelMovie
-        movie={selectedMovie}
+        selectedMovie={selectedMovie}
         onClose={() => setSelectedMovie(null)}
       />
     </div>
