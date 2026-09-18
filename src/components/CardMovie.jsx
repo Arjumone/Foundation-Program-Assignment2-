@@ -1,4 +1,4 @@
-function CardMovie({ movie, setSelectedMovie }) {
+function CardMovie({ movie, onDetails }) {
 
   const year = movie.premiered
     ? movie.premiered.slice(0, 4)
@@ -46,7 +46,7 @@ function CardMovie({ movie, setSelectedMovie }) {
         </div>
 
         <button
-          onClick={() => setSelectedMovie(movie)}
+          onClick={() => onDetails(movie)}
           className="w-full mt-5 bg-red-600 hover:bg-red-700 py-2 rounded-lg font-semibold"
         >
           See Details

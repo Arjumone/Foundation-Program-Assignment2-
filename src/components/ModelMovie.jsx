@@ -1,18 +1,18 @@
-function ModelMovie({ selectedMovie, setSelectedMovie }) {
+function ModelMovie({ movie, onClose }) {
 
-  if (!selectedMovie) {
+  if (!movie) {
     return null;
   }
 
-  const rating = selectedMovie.rating?.average || "N/A";
+  const rating = movie.rating?.average || "N/A";
 
-  const year = selectedMovie.premiered
-    ? selectedMovie.premiered.slice(0, 4)
+  const year = movie.premiered
+    ? movie.premiered.slice(0, 4)
     : "N/A";
 
   return (
     <div
-      onClick={() => setSelectedMovie(null)}
+      onClick={onClose}
       className="fixed inset-0 z-50 bg-black/80 flex items-center justify-center p-4"
     >
 
@@ -25,7 +25,7 @@ function ModelMovie({ selectedMovie, setSelectedMovie }) {
         <div className="flex justify-end p-4">
 
           <button
-            onClick={() => setSelectedMovie(null)}
+            onClick={onClose}
             className="text-2xl hover:text-red-500"
           >
             ✕
@@ -36,10 +36,10 @@ function ModelMovie({ selectedMovie, setSelectedMovie }) {
         {/* Poster */}
         <div className="px-5">
 
-          {selectedMovie.image?.original ? (
+          {movie.image?.original ? (
             <img
-              src={selectedMovie.image.original}
-              alt={selectedMovie.name}
+              src={movie.image.original}
+              alt={movie.name}
               className="w-full h-64 md:h-96 object-cover rounded-lg"
             />
           ) : (
@@ -54,7 +54,7 @@ function ModelMovie({ selectedMovie, setSelectedMovie }) {
         <div className="p-6">
 
           <h2 className="text-3xl font-bold">
-            {selectedMovie.name}
+            {movie.name}
           </h2>
 
           <div className="flex flex-wrap gap-5 mt-4 text-gray-300">
@@ -70,7 +70,7 @@ function ModelMovie({ selectedMovie, setSelectedMovie }) {
           </div>
 
           {/* Genre */}
-          {selectedMovie.genres?.length > 0 && (
+          {movie.genres?.length > 0 && (
             <div className="mt-5">
 
               <h3 className="font-bold mb-2">
@@ -79,7 +79,7 @@ function ModelMovie({ selectedMovie, setSelectedMovie }) {
 
               <div className="flex flex-wrap gap-2">
 
-                {selectedMovie.genres.map((genre) => (
+                {movie.genres.map((genre) => (
                   <span
                     key={genre}
                     className="bg-red-600 px-3 py-1 rounded-full text-sm"
@@ -104,7 +104,7 @@ function ModelMovie({ selectedMovie, setSelectedMovie }) {
               className="text-gray-300 leading-7"
               dangerouslySetInnerHTML={{
                 __html:
-                  selectedMovie.summary ||
+                  movie.summary ||
                   "No description available.",
               }}
             />
@@ -112,7 +112,7 @@ function ModelMovie({ selectedMovie, setSelectedMovie }) {
           </div>
 
           <button
-            onClick={() => setSelectedMovie(null)}
+            onClick={onClose}
             className="mt-7 bg-red-600 hover:bg-red-700 px-6 py-2 rounded-lg"
           >
             Close
